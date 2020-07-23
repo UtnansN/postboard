@@ -23,6 +23,8 @@ public class Post {
     @Enumerated
     private PostType type;
 
+    private String title;
+
     private String contents;
 
     @OneToMany

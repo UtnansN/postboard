@@ -1,11 +1,12 @@
 package com.social.postboard.dto;
 
 import lombok.Data;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.util.List;
 
 @Data
-public class CommunityPageDTO {
+public class CommunityPageDTO extends RepresentationModel<CommunityPageDTO> {
 
     private String title;
 
