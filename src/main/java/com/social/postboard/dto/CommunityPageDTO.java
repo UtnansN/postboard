@@ -3,14 +3,13 @@ package com.social.postboard.dto;
 import lombok.Data;
 import org.springframework.hateoas.RepresentationModel;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
-public class CommunityPageDTO extends RepresentationModel<CommunityPageDTO> {
+public class CommunityPageDTO extends CommunityDTO {
 
-    private String title;
-
-    private String description;
+    private LocalDateTime creationDate;
 
     private List<ShortPostDTO> posts;
 }

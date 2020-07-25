@@ -3,9 +3,7 @@ package com.social.postboard.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -14,15 +12,22 @@ import java.util.List;
 @Entity
 public class Community {
 
-    // ID is a tag used in the URL
     @Id
-    private String id;
+    @GeneratedValue
+    private Long id;
 
     private LocalDateTime creationDate;
+
+    // Tag is used in the URLs to access communities
+    @Column(unique = true, nullable = false)
+    private String tag;
 
     private String title;
 
     private String description;
+
+    @ManyToMany
+    private List<User> members;
 
     @OneToMany
     private List<Post> posts;
