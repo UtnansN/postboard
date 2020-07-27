@@ -29,7 +29,7 @@ public class CommunityController {
 
         PagedModel<EntityModel<CommunityDTO>> model = assembler.toModel(communities);
         model.forEach(m -> m.add(linkTo(methodOn(CommunityController.class)
-                .getCommunity(Objects.requireNonNull(m.getContent()).getTag())).withSelfRel()));
+                .getCommunity(Objects.requireNonNull(m.getContent()).getTag(), null)).withSelfRel()));
         return model;
     }
 
@@ -39,10 +39,10 @@ public class CommunityController {
     }
 
     @GetMapping("/{tag}")
-    public CommunityPageDTO getCommunity(@PathVariable String tag) {
+    public CommunityPageDTO getCommunity(@PathVariable String tag, Pageable pageable) {
         CommunityPageDTO communityPage = communityService.findCommunity(tag);
-
-        communityPage.add(linkTo(methodOn(CommunityController.class).getCommunity(tag)).withSelfRel());
+        // TODO: Pages in JSON
+        communityPage.add(linkTo(methodOn(CommunityController.class).getCommunity(tag, pageable)).withSelfRel());
         return communityPage;
     }
 
@@ -51,9 +51,9 @@ public class CommunityController {
         communityService.updateCommunity(tag, communityDTO);
     }
 
-    @DeleteMapping("/{cId}")
-    public void deleteCommunity(@PathVariable String cId) {
-        communityService.deleteCommunity(cId);
+    @DeleteMapping("/{tag}")
+    public void deleteCommunity(@PathVariable String tag) {
+        communityService.deleteCommunity(tag);
     }
 
 }

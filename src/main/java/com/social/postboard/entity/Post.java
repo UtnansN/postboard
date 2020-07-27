@@ -18,8 +18,6 @@ public class Post {
 
     private LocalDateTime creationDate;
 
-    private Long upVotes;
-
     @Enumerated
     private PostType type;
 
@@ -30,4 +28,9 @@ public class Post {
     @OneToMany
     private List<Comment> comments;
 
+    @ManyToMany
+    private List<User> upVoters;
+
+    @ManyToOne
+    private Community community;
 }

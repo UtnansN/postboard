@@ -22,6 +22,7 @@ public class Community {
     @Column(unique = true, nullable = false)
     private String tag;
 
+    @Column(nullable = false)
     private String title;
 
     private String description;
