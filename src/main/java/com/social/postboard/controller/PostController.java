@@ -1,5 +1,6 @@
 package com.social.postboard.controller;
 
+import com.social.postboard.dto.CommentDTO;
 import com.social.postboard.dto.FullPostDTO;
 import com.social.postboard.dto.ShortPostDTO;
 import com.social.postboard.service.PostService;
@@ -33,12 +34,17 @@ public class PostController {
     }
 
     @PutMapping("/{id}")
-    public void updatePost(@PathVariable int id) {
-
+    public void updatePost(@PathVariable int id, @RequestBody ShortPostDTO postDTO) {
+        postService.updatePost((long) id, postDTO);
     }
 
     @DeleteMapping("/{id}")
     public void deletePost(@PathVariable int id) {
         postService.removePost((long) id);
+    }
+
+    @PostMapping("/{id}/comment")
+    public void addComment(@PathVariable int id, @RequestBody CommentDTO commentDTO) {
+        postService.addComment((long) id, commentDTO);
     }
 }

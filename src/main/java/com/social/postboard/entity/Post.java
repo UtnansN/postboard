@@ -18,6 +18,8 @@ public class Post {
 
     private LocalDateTime creationDate;
 
+    private LocalDateTime lastEdited;
+
     @Enumerated
     private PostType type;
 

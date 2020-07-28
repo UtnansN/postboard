@@ -53,6 +53,7 @@ public class PostService {
         Post post = postMapper.toPost(postDTO);
 
         post.setCreationDate(LocalDateTime.now());
+        post.setLastEdited(post.getCreationDate());
         post.getUpVoters().add(new User());
         post.setCommunity(parentCommunity);
         postRepository.save(post);
@@ -72,8 +73,12 @@ public class PostService {
         commentRepository.save(comment);
     }
 
-    public void updatePost() {
+    public void updatePost(Long id, ShortPostDTO shortPostDTO) {
+        Post post = postRepository.findById(id)
+                .orElseThrow(ResourceNotFoundException::new);
 
+        Post updatedPost = postMapper.updatePost(shortPostDTO, post);
+        postRepository.save(updatedPost);
     }
 
     public void removePost(Long id) {

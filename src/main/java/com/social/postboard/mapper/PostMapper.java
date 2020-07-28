@@ -5,6 +5,7 @@ import com.social.postboard.dto.ShortPostDTO;
 import com.social.postboard.entity.Post;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 
 @Mapper
 public interface PostMapper {
@@ -13,4 +14,6 @@ public interface PostMapper {
     FullPostDTO toFullPost(Post post);
 
     Post toPost(ShortPostDTO postDTO);
+
+    Post updatePost(ShortPostDTO postDTO, @MappingTarget Post post);
 }
