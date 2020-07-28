@@ -47,4 +47,9 @@ public class PostController {
     public void addComment(@PathVariable int id, @RequestBody CommentDTO commentDTO) {
         postService.addComment((long) id, commentDTO);
     }
+
+    @DeleteMapping("/{pId}/comment/{cId}")
+    public void deleteComment(@PathVariable int cId) {
+        postService.deleteComment((long) cId);
+    }
 }

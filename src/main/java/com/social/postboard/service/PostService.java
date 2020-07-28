@@ -59,20 +59,6 @@ public class PostService {
         postRepository.save(post);
     }
 
-    public void addComment(Long postId, CommentDTO commentDTO) {
-
-        Post parentPost = postRepository.findById(postId)
-                .orElseThrow(ResourceNotFoundException::new);
-
-        Comment comment = commentMapper.toComment(commentDTO);
-
-        // FIXME: Add actual user that up-voted
-        comment.getUpVoters().add(new User());
-        comment.setCreationDate(LocalDateTime.now());
-        comment.setPost(parentPost);
-        commentRepository.save(comment);
-    }
-
     public void updatePost(Long id, ShortPostDTO shortPostDTO) {
         Post post = postRepository.findById(id)
                 .orElseThrow(ResourceNotFoundException::new);
@@ -83,5 +69,31 @@ public class PostService {
 
     public void removePost(Long id) {
         postRepository.deleteById(id);
+    }
+
+    public void addComment(Long postID, CommentDTO commentDTO) {
+
+        Post parentPost = postRepository.findById(postID)
+                .orElseThrow(ResourceNotFoundException::new);
+
+        Comment comment = commentMapper.toComment(commentDTO);
+
+        // FIXME: Add actual user that up-voted
+        comment.getUpVoters().add(new User());
+        comment.setCreationDate(LocalDateTime.now());
+        comment.setEditDate(comment.getCreationDate());
+        comment.setPost(parentPost);
+        commentRepository.save(comment);
+    }
+
+    public void editComment(Long commentID, CommentDTO commentDTO) {
+        Comment comment = commentRepository.findById(commentID)
+                .orElseThrow(ResourceNotFoundException::new);
+
+
+    }
+
+    public void deleteComment(Long cID) {
+        commentRepository.deleteById(cID);
     }
 }

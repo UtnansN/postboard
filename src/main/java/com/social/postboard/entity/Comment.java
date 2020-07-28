@@ -18,6 +18,8 @@ public class Comment {
 
     private LocalDateTime creationDate;
 
+    private LocalDateTime editDate;
+
     private String text;
 
     @ManyToMany
